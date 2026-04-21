@@ -1,0 +1,21 @@
+{
+  "version": 2,
+  "name": "becayiscepte-privacy",
+  "buildCommand": null,
+  "outputDirectory": ".",
+  "framework": null,
+  "routes": [
+    {
+      "src": "/privacy",
+      "dest": "/index.html"
+    },
+    {
+      "src": "/gizlilik",
+      "dest": "/index.html"
+    },
+    {
+      "src": "/",
+      "dest": "/index.html"
+    }
+  ]
+}
