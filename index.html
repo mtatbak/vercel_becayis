@@ -10,654 +10,18 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-  <link rel="shortcut icon" href="/favicon.svg" type="image/svg+xml" />
-  <style>
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    :root {
-      --primary:       #1A56DB;
-      --primary-light: #EBF2FF;
-      --primary-soft:  #EEF2FF;
-      --primary-border:#E0E7FF;
-      --primary-dark:  #0F2A66;
-      --gray-50:  #F9FAFB;
-      --gray-100: #F3F4F6;
-      --gray-200: #E5E7EB;
-      --gray-300: #D1D5DB;
-      --gray-600: #4B5563;
-      --gray-700: #374151;
-      --gray-800: #1F2937;
-      --gray-900: #111827;
-      --success:  #10B981;
-      --amber:    #F59E0B;
-      --white:    #FFFFFF;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'Inter', system-ui, -apple-system, sans-serif;
-      background:
-        radial-gradient(circle at top left, rgba(26, 86, 219, 0.12), transparent 32%),
-        radial-gradient(circle at top right, rgba(15, 42, 102, 0.14), transparent 26%),
-        linear-gradient(180deg, #f8fbff 0%, #f4f7fb 100%);
-      color: var(--gray-800);
-      line-height: 1.7;
-      font-size: 15px;
-      position: relative;
-      overflow-x: hidden;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      background-image:
-        linear-gradient(rgba(255,255,255,0.45) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.35) 1px, transparent 1px);
-      background-size: 28px 28px;
-      mask-image: linear-gradient(180deg, rgba(0,0,0,0.4), rgba(0,0,0,0.08));
-      opacity: 0.35;
-    }
-
-    body::after {
-      content: "";
-      position: fixed;
-      inset: auto 0 0 0;
-      height: 220px;
-      pointer-events: none;
-      background: linear-gradient(180deg, rgba(255,255,255,0), rgba(255,255,255,0.72));
-    }
-
-    h1, h2, h3, .footer-logo, .toc-title, .section-num {
-      font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
-    }
-
-    /* ── HEADER ─────────────────────────────── */
-    header {
-      background:
-        radial-gradient(circle at top right, rgba(255,255,255,0.16), transparent 28%),
-        linear-gradient(135deg, #0b1f4d 0%, var(--primary-dark) 42%, var(--primary) 100%);
-      color: var(--white);
-      padding: 0 1.5rem;
-      position: relative;
-      overflow: hidden;
-    }
-
-    header::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(255,255,255,0.08), transparent 45%);
-      pointer-events: none;
-    }
-
-    .header-inner {
-      max-width: 760px;
-      margin: 0 auto;
-      padding: 3rem 0 3.5rem;
-      position: relative;
-      z-index: 1;
-    }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(255,255,255,0.15);
-      border: 1px solid rgba(255,255,255,0.25);
-      color: rgba(255,255,255,0.9);
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.8px;
-      text-transform: uppercase;
-      padding: 4px 12px;
-      border-radius: 999px;
-      margin-bottom: 1.25rem;
-      backdrop-filter: blur(10px);
-    }
-
-    .badge svg { opacity: 0.85; }
-
-    header h1 {
-      font-size: clamp(1.75rem, 4vw, 2.5rem);
-      font-weight: 800;
-      letter-spacing: -0.5px;
-      line-height: 1.2;
-      margin-bottom: 0.75rem;
-    }
-
-    .header-sub {
-      color: rgba(255,255,255,0.75);
-      font-size: 0.9rem;
-      font-weight: 500;
-      max-width: 54ch;
-    }
-
-    .header-meta {
-      margin-top: 1.75rem;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    .meta-chip {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(255,255,255,0.12);
-      border: 1px solid rgba(255,255,255,0.2);
-      border-radius: 8px;
-      padding: 6px 14px;
-      font-size: 12px;
-      font-weight: 600;
-      color: rgba(255,255,255,0.9);
-      backdrop-filter: blur(10px);
-    }
-
-    /* ── TOC ────────────────────────────────── */
-    .toc-wrap {
-      max-width: 760px;
-      margin: 2rem auto 0;
-      padding: 0 1.5rem;
-    }
-
-    .toc {
-      background: rgba(255,255,255,0.9);
-      border: 1px solid rgba(224,231,255,0.9);
-      border-radius: 18px;
-      padding: 1.45rem 1.75rem;
-      box-shadow: 0 16px 40px rgba(26,86,219,0.08);
-      backdrop-filter: blur(16px);
-    }
-
-    .toc-title {
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 0.8px;
-      text-transform: uppercase;
-      color: var(--primary);
-      margin-bottom: 1rem;
-    }
-
-    .toc ol {
-      list-style: none;
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 6px 1.5rem;
-      counter-reset: toc;
-    }
-
-    .toc ol li {
-      counter-increment: toc;
-      display: flex;
-      align-items: baseline;
-      gap: 8px;
-    }
-
-    .toc ol li::before {
-      content: counter(toc, decimal-leading-zero);
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--primary);
-      min-width: 22px;
-    }
-
-    .toc a {
-      color: var(--gray-700);
-      text-decoration: none;
-      font-size: 13px;
-      font-weight: 500;
-      transition: color 0.15s;
-    }
-
-    .toc a:hover {
-      color: var(--primary);
-      text-decoration: underline;
-      text-underline-offset: 3px;
-    }
-
-    /* ── MAIN ───────────────────────────────── */
-    main {
-      max-width: 760px;
-      margin: 2.5rem auto 4rem;
-      padding: 0 1.5rem;
-    }
-
-    /* ── SECTION ────────────────────────────── */
-    .section {
-      background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(255,255,255,0.9));
-      border: 1px solid rgba(224,231,255,0.82);
-      border-radius: 20px;
-      padding: 2rem 2.25rem;
-      margin-bottom: 1.25rem;
-      box-shadow: 0 14px 32px rgba(17,24,39,0.06);
-      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-      backdrop-filter: blur(8px);
-    }
-
-    .section:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 18px 40px rgba(26,86,219,0.1);
-      border-color: rgba(170, 184, 255, 0.9);
-    }
-
-    .section-header {
-      display: flex;
-      align-items: flex-start;
-      gap: 14px;
-      margin-bottom: 1.25rem;
-    }
-
-    .section-icon {
-      flex-shrink: 0;
-      width: 42px;
-      height: 42px;
-      background: linear-gradient(135deg, rgba(26,86,219,0.12), rgba(15,42,102,0.08));
-      border: 1px solid rgba(26,86,219,0.12);
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 17px;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
-    }
-
-    .section-title-group { flex: 1; }
-
-    .section-num {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.6px;
-      text-transform: uppercase;
-      color: var(--primary);
-      margin-bottom: 2px;
-    }
-
-    .section h2 {
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: var(--gray-900);
-      letter-spacing: -0.2px;
-    }
-
-    .section p {
-      color: var(--gray-700);
-      margin-bottom: 0.85rem;
-      font-size: 0.9rem;
-    }
-
-    .section p:last-child { margin-bottom: 0; }
-
-    /* ── DATA TABLE ─────────────────────────── */
-    .data-grid {
-      display: grid;
-      gap: 8px;
-      margin-top: 0.5rem;
-      margin-bottom: 1rem;
-    }
-
-    .data-row {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      background: linear-gradient(180deg, #fbfdff, #f6f9ff);
-      border: 1px solid rgba(224,231,255,0.95);
-      border-radius: 14px;
-      padding: 10px 14px;
-      box-shadow: 0 8px 18px rgba(17,24,39,0.03);
-    }
-
-    .data-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--primary), #7c93ff);
-      margin-top: 5px;
-      flex-shrink: 0;
-      box-shadow: 0 0 0 4px rgba(26,86,219,0.08);
-    }
-
-    .data-label {
-      font-size: 0.82rem;
-      font-weight: 700;
-      color: var(--gray-900);
-      margin-bottom: 1px;
-    }
-
-    .data-desc {
-      font-size: 0.8rem;
-      color: var(--gray-600);
-      line-height: 1.5;
-    }
-
-    /* ── CALLOUT ────────────────────────────── */
-    .callout {
-      display: flex;
-      gap: 12px;
-      padding: 14px 16px;
-      border-radius: 14px;
-      margin-top: 1rem;
-      font-size: 0.85rem;
-      line-height: 1.55;
-      box-shadow: 0 10px 24px rgba(17,24,39,0.04);
-    }
-
-    .callout-info {
-      background: linear-gradient(180deg, #eff6ff, #e9f1ff);
-      border: 1px solid #cfe0ff;
-      color: #1d4ed8;
-    }
-
-    .callout-success {
-      background: linear-gradient(180deg, #ecfdf5, #e3fbef);
-      border: 1px solid #c7f5de;
-      color: #047857;
-    }
-
-    .callout-amber {
-      background: linear-gradient(180deg, #fff8e6, #fff4d4);
-      border: 1px solid #fde8ab;
-      color: #9a6700;
-    }
-
-    .callout-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
-    .callout strong { font-weight: 700; }
-
-    /* ── INLINE LIST ────────────────────────── */
-    ul.check-list {
-      list-style: none;
-      margin-top: 0.5rem;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    ul.check-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
-      font-size: 0.875rem;
-      color: var(--gray-700);
-    }
-
-    ul.check-list li::before {
-      content: "✓";
-      font-weight: 700;
-      color: var(--success);
-      flex-shrink: 0;
-      margin-top: 1px;
-    }
-
-    /* ── RIGHT SECTION ──────────────────────── */
-    .right-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      margin-top: 0.5rem;
-    }
-
-    .right-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      background: linear-gradient(180deg, #f5f7ff, #eef2ff);
-      border: 1px solid rgba(224,231,255,0.92);
-      border-radius: 14px;
-      padding: 10px 14px;
-      font-size: 0.85rem;
-      color: var(--gray-800);
-      box-shadow: 0 8px 18px rgba(17,24,39,0.03);
-    }
-
-    .right-list li span.icon {
-      font-size: 15px;
-      flex-shrink: 0;
-      margin-top: 1px;
-    }
-
-    /* ── CONTACT CARD ───────────────────────── */
-    .contact-card {
-      background:
-        radial-gradient(circle at top right, rgba(255,255,255,0.12), transparent 30%),
-        linear-gradient(135deg, #081a43 0%, var(--primary-dark) 45%, var(--primary) 100%);
-      border-radius: 18px;
-      padding: 1.9rem 2rem;
-      color: var(--white);
-      margin-top: 1.25rem;
-      box-shadow: 0 20px 46px rgba(15,42,102,0.22);
-      border: 1px solid rgba(255,255,255,0.14);
-    }
-
-    .contact-stats {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 1.25rem;
-    }
-
-    .contact-stat {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(255,255,255,0.13);
-      border: 1px solid rgba(255,255,255,0.2);
-      border-radius: 10px;
-      padding: 5px 11px;
-      font-size: 0.76rem;
-      font-weight: 600;
-      color: rgba(255,255,255,0.92);
-      letter-spacing: 0.1px;
-    }
-
-    .contact-stat .stat-val {
-      color: #fff;
-      font-weight: 800;
-    }
-
-    .contact-card h3 {
-      font-size: 1rem;
-      font-weight: 700;
-      margin-bottom: 0.4rem;
-    }
-
-    .contact-card > p {
-      font-size: 0.85rem;
-      color: rgba(255,255,255,0.78);
-      margin-bottom: 1rem;
-    }
-
-    .contact-divider {
-      height: 1px;
-      background: rgba(255,255,255,0.12);
-      margin: 1rem 0;
-    }
-
-    .contact-tips {
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.13);
-      border-radius: 12px;
-      padding: 12px 14px;
-      margin-bottom: 1.1rem;
-    }
-
-    .contact-tips-title {
-      font-size: 0.72rem;
-      font-weight: 800;
-      color: rgba(255,255,255,0.55);
-      text-transform: uppercase;
-      letter-spacing: 0.7px;
-      margin-bottom: 8px;
-    }
-
-    .contact-tips ul {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-    }
-
-    .contact-tips li {
-      font-size: 0.8rem;
-      color: rgba(255,255,255,0.82);
-      display: flex;
-      align-items: flex-start;
-      gap: 7px;
-      line-height: 1.45;
-    }
-
-    .contact-tips li::before {
-      content: "›";
-      font-size: 1rem;
-      font-weight: 700;
-      color: rgba(255,255,255,0.45);
-      flex-shrink: 0;
-      line-height: 1.3;
-    }
-
-    .contact-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(255,255,255,0.15);
-      border: 1px solid rgba(255,255,255,0.3);
-      color: var(--white);
-      text-decoration: none;
-      font-size: 0.85rem;
-      font-weight: 600;
-      padding: 8px 16px;
-      border-radius: 999px;
-      transition: transform 0.15s, background 0.15s, box-shadow 0.15s;
-      box-shadow: 0 8px 18px rgba(0,0,0,0.12);
-      max-width: 100%;
-      overflow-wrap: anywhere;
-    }
-
-    .contact-link:hover {
-      background: rgba(255,255,255,0.26);
-      transform: translateY(-1px);
-    }
-
-    /* ── FOOTER ─────────────────────────────── */
-    footer {
-      background: rgba(255,255,255,0.78);
-      border-top: 1px solid rgba(224,231,255,0.9);
-      padding: 2rem 1.5rem;
-      text-align: center;
-      backdrop-filter: blur(14px);
-    }
-
-    .footer-inner {
-      max-width: 760px;
-      margin: 0 auto;
-    }
-
-    .footer-logo {
-      font-size: 1rem;
-      font-weight: 800;
-      color: var(--primary);
-      letter-spacing: -0.3px;
-      margin-bottom: 0.4rem;
-    }
-
-    footer p {
-      font-size: 0.78rem;
-      color: var(--gray-600);
-    }
-
-    footer a { color: var(--primary); text-decoration: none; }
-    footer a:hover { text-decoration: underline; }
-
-    /* ── RESPONSIVE ─────────────────────────── */
-    @media (max-width: 900px) {
-      .toc ol {
-        grid-template-columns: 1fr 1fr;
-        gap: 8px 1rem;
-      }
-
-      .section {
-        padding: 1.8rem 1.6rem;
-      }
-    }
-
-    @media (max-width: 680px) {
-      .header-meta {
-        gap: 0.6rem;
-      }
-
-      .meta-chip {
-        width: 100%;
-        justify-content: center;
-      }
-
-      .toc-wrap,
-      main,
-      footer {
-        padding-left: 1rem;
-        padding-right: 1rem;
-      }
-
-      .toc {
-        padding: 1.25rem 1.1rem;
-      }
-
-      .toc ol {
-        grid-template-columns: 1fr;
-      }
-
-      .section {
-        padding: 1.45rem 1.15rem;
-        border-radius: 16px;
-      }
-
-      .section-header {
-        flex-direction: column;
-        gap: 10px;
-      }
-
-      .callout,
-      .data-row,
-      .right-list li {
-        border-radius: 12px;
-      }
-
-      .contact-card {
-        padding: 1.5rem 1.1rem;
-      }
-
-      .contact-link {
-        width: 100%;
-        justify-content: center;
-      }
-    }
-
-    @media (max-width: 420px) {
-      body {
-        font-size: 14px;
-      }
-
-      header h1 {
-        font-size: 1.65rem;
-      }
-
-      .badge {
-        font-size: 10px;
-        padding: 4px 10px;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="/style.css" />
 </head>
 <body>
 
   <!-- HEADER -->
   <header>
     <div class="header-inner">
+      <nav class="topnav" aria-label="Sayfalar">
+        <a href="/gizlilik" class="active">Gizlilik Politikası</a>
+        <a href="/kvkk">KVKK Aydınlatma</a>
+        <a href="/hesap-sil">Hesap Silme</a>
+      </nav>
       <div class="badge">
         <svg width="11" height="11" viewBox="0 0 16 16" fill="none"><path d="M8 1L10.2 5.5L15 6.2L11.5 9.6L12.4 14.4L8 12L3.6 14.4L4.5 9.6L1 6.2L5.8 5.5L8 1Z" fill="white"/></svg>
         Resmi Gizlilik Politikası
@@ -681,29 +45,28 @@
     </div>
   </header>
 
-  <!-- TABLE OF CONTENTS -->
+  <!-- TOC -->
   <div class="toc-wrap">
     <nav class="toc" aria-label="İçindekiler">
       <div class="toc-title">İçindekiler</div>
       <ol>
         <li><a href="#section-1">Genel Bilgiler</a></li>
         <li><a href="#section-2">Toplanan Veriler</a></li>
-        <li><a href="#section-3">Verilerin Kullanım Amacı</a></li>
+        <li><a href="#section-3">Kullanım Amacı</a></li>
         <li><a href="#section-4">Veri Paylaşımı</a></li>
         <li><a href="#section-5">Veri Güvenliği</a></li>
-        <li><a href="#section-6">Veri Saklama Süresi</a></li>
+        <li><a href="#section-6">Saklama Süresi</a></li>
         <li><a href="#section-7">Kullanıcı Hakları</a></li>
-        <li><a href="#section-8">Çocuklara Yönelik Gizlilik</a></li>
+        <li><a href="#section-8">Çocuklara Yönelik</a></li>
         <li><a href="#section-9">Politika Değişiklikleri</a></li>
         <li><a href="#section-10">İletişim</a></li>
       </ol>
     </nav>
   </div>
 
-  <!-- MAIN CONTENT -->
+  <!-- MAIN -->
   <main>
 
-    <!-- 1. GENEL -->
     <section class="section" id="section-1">
       <div class="section-header">
         <div class="section-icon">🏛️</div>
@@ -720,14 +83,13 @@
       </p>
       <div class="callout callout-info">
         <span class="callout-icon">ℹ️</span>
-        <span>Bu politika, <strong>Google Play Kullanıcı Verileri Politikası</strong> ve Türk kişisel veri koruma mevzuatı çerçevesinde hazırlanmıştır.</span>
+        <span>Bu politika, <strong>Google Play Kullanıcı Verileri Politikası</strong> ve <strong>6698 sayılı KVKK</strong> çerçevesinde hazırlanmıştır.</span>
       </div>
     </section>
 
-    <!-- 2. TOPLANAN VERİLER -->
     <section class="section" id="section-2">
       <div class="section-header">
-        <div class="section-icon">🗂️</div>
+        <div class="section-icon">🗃️</div>
         <div class="section-title-group">
           <div class="section-num">02</div>
           <h2>Toplanan Kişisel Veriler</h2>
@@ -739,7 +101,7 @@
         <div class="data-row">
           <div class="data-dot"></div>
           <div>
-            <div class="data-label">Kimlik &amp; İletişim Bilgileri</div>
+            <div class="data-label">Kimlik & İletişim Bilgileri</div>
             <div class="data-desc">Ad, soyad, e-posta adresi ve telefon numarası. Hesap oluşturma, SMS/OTP doğrulama ve şifre sıfırlama süreçleri için gereklidir.</div>
           </div>
         </div>
@@ -768,18 +130,17 @@
           <div class="data-dot"></div>
           <div>
             <div class="data-label">Uygulama Etkinliği</div>
-            <div class="data-desc">Hata raporları ve performans verileri (Sentry aracılığıyla). Bu veriler kişisel kimlikle ilişkilendirilmeden anonim olarak toplanabilir.</div>
+            <div class="data-desc">Hata raporları ve performans verileri (Sentry aracılığıyla). Telefon/e-posta gibi PII verileri otomatik olarak maskelenerek gönderilir.</div>
           </div>
         </div>
       </div>
 
       <div class="callout callout-success">
-        <span class="callout-icon">✅</span>
-        <span><strong>Toplanmayan veriler:</strong> GPS / hassas konum, kamera, mikrofon, rehber, fotoğraf erişimi talep edilmez.</span>
+        <span class="callout-icon">✓</span>
+        <span><strong>Toplanmayan veriler:</strong> GPS / hassas konum, kamera, mikrofon, rehber, fotoğraf, takvim, sağlık, biyometrik veri.</span>
       </div>
     </section>
 
-    <!-- 3. KULLANIM AMACI -->
     <section class="section" id="section-3">
       <div class="section-header">
         <div class="section-icon">🎯</div>
@@ -804,7 +165,6 @@
       </div>
     </section>
 
-    <!-- 4. VERİ PAYLAŞIMI -->
     <section class="section" id="section-4">
       <div class="section-header">
         <div class="section-icon">🔗</div>
@@ -819,22 +179,29 @@
         <div class="data-row">
           <div class="data-dot"></div>
           <div>
-            <div class="data-label">Supabase (Veritabanı &amp; Kimlik Doğrulama)</div>
-            <div class="data-desc">Kullanıcı hesapları, ilan verileri ve oturum bilgileri Supabase altyapısında saklanır. Supabase, SOC 2 Type II sertifikalı bir sağlayıcıdır.</div>
+            <div class="data-label">Supabase (Veritabanı & Kimlik Doğrulama)</div>
+            <div class="data-desc">Kullanıcı hesapları, ilan verileri ve oturum bilgileri Supabase altyapısında saklanır. Supabase, SOC 2 Type II sertifikalı bir sağlayıcıdır. Veriler AB bölgesinde barındırılır.</div>
           </div>
         </div>
         <div class="data-row">
           <div class="data-dot"></div>
           <div>
-            <div class="data-label">Google Play (Ödeme)</div>
-            <div class="data-desc">Uygulama içi satın alma işlemleri Google Play altyapısı üzerinden gerçekleşir. Ödeme bilgileri uygulama sunucularımıza iletilmez.</div>
+            <div class="data-label">Twilio (SMS Doğrulama)</div>
+            <div class="data-desc">Telefon numarası doğrulaması için Twilio Verify servisi kullanılır. Numara, OTP gönderimi süresince Twilio ile paylaşılır.</div>
+          </div>
+        </div>
+        <div class="data-row">
+          <div class="data-dot"></div>
+          <div>
+            <div class="data-label">Google Play (Ödeme + Bildirim)</div>
+            <div class="data-desc">Uygulama içi satın alma Google Play Billing üzerinden, push bildirimleri Firebase Cloud Messaging (FCM) üzerinden gerçekleşir.</div>
           </div>
         </div>
         <div class="data-row">
           <div class="data-dot"></div>
           <div>
             <div class="data-label">Sentry (Hata Takibi)</div>
-            <div class="data-desc">Uygulama çökmesi ve hata raporları Sentry platformuna iletilir. Bu raporlar teknik hata bilgisi içerir; kişisel tanımlayıcı veri gönderilmemeye özen gösterilir.</div>
+            <div class="data-desc">Uygulama çökmesi ve hata raporları Sentry'ye iletilir. Telefon/e-posta gibi PII verileri otomatik maskelenir.</div>
           </div>
         </div>
       </div>
@@ -842,7 +209,6 @@
       <p>Yasal zorunluluk durumunda (mahkeme kararı vb.) yetkili mercilerle paylaşım yapılabilir.</p>
     </section>
 
-    <!-- 5. GÜVENLİK -->
     <section class="section" id="section-5">
       <div class="section-header">
         <div class="section-icon">🔒</div>
@@ -854,10 +220,11 @@
       <p>Verilerinizin güvenliği için aşağıdaki teknik ve idari önlemler alınmaktadır:</p>
       <ul class="check-list">
         <li>Tüm veri iletimi HTTPS / TLS şifrelemesiyle korunur</li>
-        <li>Şifreler düz metin olarak saklanmaz; güvenli hash algoritmaları kullanılır</li>
+        <li>Şifreler düz metin olarak saklanmaz; bcrypt hash algoritması kullanılır</li>
         <li>Sızdırılmış şifre koruması (Supabase Leaked Password Protection) aktiftir</li>
-        <li>SMS/OTP ile iki adımlı telefon doğrulama zorunlu tutulur</li>
-        <li>Yetkisiz erişim girişimleri Supabase güvenlik katmanı tarafından izlenir</li>
+        <li>SMS/OTP ile iki adımlı telefon doğrulama zorunludur</li>
+        <li>Row Level Security (RLS) ile veriler kullanıcı bazında izole edilir</li>
+        <li>SMS ve şifre sıfırlama akışlarında çift katmanlı rate limiting uygulanır</li>
       </ul>
       <div class="callout callout-info">
         <span class="callout-icon">ℹ️</span>
@@ -865,10 +232,9 @@
       </div>
     </section>
 
-    <!-- 6. SAKLAMA SÜRESİ -->
     <section class="section" id="section-6">
       <div class="section-header">
-        <div class="section-icon">📅</div>
+        <div class="section-icon">🕒</div>
         <div class="section-title-group">
           <div class="section-num">06</div>
           <h2>Veri Saklama Süresi</h2>
@@ -882,21 +248,23 @@
         <li>Hata raporlarının teknik analiz süresi (genellikle 30–90 gün)</li>
         <li>Ödeme kayıtları (Google Play politikaları gereği)</li>
       </ul>
+      <p style="margin-top:0.85rem;">
+        Detaylı bilgi için <a href="/hesap-sil" style="color:var(--primary);font-weight:600;">Hesap Silme</a> sayfasını inceleyebilirsiniz.
+      </p>
     </section>
 
-    <!-- 7. KULLANICI HAKLARI -->
     <section class="section" id="section-7">
       <div class="section-header">
         <div class="section-icon">⚖️</div>
         <div class="section-title-group">
           <div class="section-num">07</div>
-          <h2>Kullanıcı Hakları</h2>
+          <h2>Kullanıcı Hakları (KVKK Madde 11)</h2>
         </div>
       </div>
       <p>Kişisel verileriniz üzerinde aşağıdaki haklara sahipsiniz:</p>
       <ul class="right-list">
         <li>
-          <span class="icon">👁️</span>
+          <span class="icon">🗒️</span>
           <span><strong>Erişim:</strong> Hakkınızda tutulan verilerin neler olduğunu öğrenme hakkı</span>
         </li>
         <li>
@@ -905,7 +273,7 @@
         </li>
         <li>
           <span class="icon">🗑️</span>
-          <span><strong>Silme:</strong> Hesabınızı ve tüm kişisel verilerinizi silme hakkı (uygulama içi profil ayarlarından veya e-posta ile talep yoluyla)</span>
+          <span><strong>Silme:</strong> Hesabınızı ve tüm kişisel verilerinizi silme hakkı (uygulama içi profil ayarlarından veya web sayfası üzerinden)</span>
         </li>
         <li>
           <span class="icon">📦</span>
@@ -916,13 +284,12 @@
           <span><strong>İşlemeyi kısıtlama:</strong> Belirli veri işleme faaliyetlerine itiraz etme hakkı</span>
         </li>
       </ul>
-      <div class="callout callout-info" style="margin-top: 1rem;">
+      <div class="callout callout-info" style="margin-top:1rem;">
         <span class="callout-icon">⏱</span>
-        <span>Bu haklarınızı kullanmak için aşağıdaki iletişim adresine başvurabilirsiniz. Talepler en geç <strong>15 gün</strong> içinde yanıtlanır.</span>
+        <span>Bu haklarınızı kullanmak için aşağıdaki iletişim adresine başvurabilirsiniz. Talepler en geç <strong>30 gün</strong> içinde yanıtlanır (KVKK Madde 13).</span>
       </div>
     </section>
 
-    <!-- 8. ÇOCUKLAR -->
     <section class="section" id="section-8">
       <div class="section-header">
         <div class="section-icon">🧒</div>
@@ -940,7 +307,6 @@
       </div>
     </section>
 
-    <!-- 9. DEĞİŞİKLİKLER -->
     <section class="section" id="section-9">
       <div class="section-header">
         <div class="section-icon">🔄</div>
@@ -957,7 +323,6 @@
       </p>
     </section>
 
-    <!-- 10. İLETİŞİM -->
     <section class="section" id="section-10">
       <div class="section-header">
         <div class="section-icon">📬</div>
@@ -971,11 +336,11 @@
       </p>
       <div class="contact-card">
         <div class="contact-stats">
-          <div class="contact-stat">⏱ <span class="stat-val">15 gün</span> içinde yanıt</div>
-          <div class="contact-stat">📧 E-posta ile iletişim</div>
+          <div class="contact-stat">⏱ <span class="stat-val">30 gün</span> içinde yanıt</div>
+          <div class="contact-stat">📧 E-posta</div>
           <div class="contact-stat">🔒 Güvenli iletişim</div>
         </div>
-        <h3>Becayiş Cepte — Geliştirici İletişim</h3>
+        <h3>Becayiş Cepte — İletişim</h3>
         <p>Veri silme talepleri dahil tüm gizlilik konularında aşağıdaki adrese yazabilirsiniz.</p>
         <div class="contact-tips">
           <div class="contact-tips-title">Mesajınıza eklemenizi öneririz</div>
@@ -994,12 +359,17 @@
 
   </main>
 
-  <!-- FOOTER -->
   <footer>
     <div class="footer-inner">
       <div class="footer-logo">Becayiş Cepte</div>
+      <div class="footer-links">
+        <a href="/gizlilik">Gizlilik Politikası</a>
+        <a href="/kvkk">KVKK Aydınlatma</a>
+        <a href="/hesap-sil">Hesap Silme</a>
+        <a href="mailto:becayiscepte@gmail.com">İletişim</a>
+      </div>
       <p>© 2026 Becayiş Cepte. Tüm hakları saklıdır.</p>
-      <p style="margin-top: 4px;">Bu uygulama resmi bir kamu kurumu değildir. &nbsp;·&nbsp; <a href="mailto:becayiscepte@gmail.com">İletişim</a></p>
+      <p style="margin-top:4px;">Bu uygulama resmi bir kamu kurumu değildir.</p>
     </div>
   </footer>
 

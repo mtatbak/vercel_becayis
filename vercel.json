@@ -4,18 +4,29 @@
   "buildCommand": null,
   "outputDirectory": ".",
   "framework": null,
-  "routes": [
+  "headers": [
     {
-      "src": "/privacy",
-      "dest": "/index.html"
+      "source": "/style.css",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=86400, must-revalidate" }
+      ]
     },
     {
-      "src": "/gizlilik",
-      "dest": "/index.html"
-    },
-    {
-      "src": "/",
-      "dest": "/index.html"
+      "source": "/(gizlilik|privacy|kvkk|hesap-sil|account-deletion)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=3600, must-revalidate" }
+      ]
     }
+  ],
+  "rewrites": [
+    { "source": "/", "destination": "/index.html" },
+    { "source": "/gizlilik", "destination": "/index.html" },
+    { "source": "/privacy", "destination": "/index.html" },
+    { "source": "/privacy-policy", "destination": "/index.html" },
+    { "source": "/kvkk", "destination": "/kvkk.html" },
+    { "source": "/kvkk-aydinlatma", "destination": "/kvkk.html" },
+    { "source": "/hesap-sil", "destination": "/hesap-sil.html" },
+    { "source": "/account-deletion", "destination": "/hesap-sil.html" },
+    { "source": "/delete-account", "destination": "/hesap-sil.html" }
   ]
 }
