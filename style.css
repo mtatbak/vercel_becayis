@@ -177,6 +177,42 @@ header h1 {
   color: var(--white);
 }
 
+.header-cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 1.25rem;
+}
+
+.store-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255,255,255,0.14);
+  border: 1px solid rgba(255,255,255,0.32);
+  color: var(--white);
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  box-shadow: 0 12px 22px rgba(0,0,0,0.18);
+  transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+}
+
+.store-badge svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.store-badge:hover {
+  background: rgba(255,255,255,0.22);
+  border-color: rgba(255,255,255,0.5);
+  transform: translateY(-1px);
+}
+
 /* TOC */
 .toc-wrap {
   max-width: 760px;
@@ -701,6 +737,7 @@ footer a:hover { text-decoration: underline; }
   .callout, .data-row, .right-list li { border-radius: 12px; }
   .contact-card { padding: 1.5rem 1.1rem; }
   .contact-link { width: 100%; justify-content: center; }
+  .store-badge { width: 100%; justify-content: center; }
   .topnav { width: 100%; }
   .topnav a { flex: 1; justify-content: center; }
 }
