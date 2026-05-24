@@ -528,6 +528,66 @@ ul.cross-list li::before {
   font-family: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
 }
 
+/* PARTNER */
+.partner-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 12px;
+  margin-top: 0.65rem;
+}
+
+.partner-card {
+  background: linear-gradient(180deg, #fbfdff, #f4f8ff);
+  border: 1px solid rgba(224,231,255,0.95);
+  border-radius: 14px;
+  padding: 14px 15px;
+  box-shadow: 0 8px 18px rgba(17,24,39,0.03);
+}
+
+.partner-chip {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: var(--primary);
+  background: var(--primary-light);
+  border: 1px solid var(--primary-border);
+  border-radius: 999px;
+  padding: 4px 10px;
+  margin-bottom: 0.65rem;
+}
+
+.partner-card h3 {
+  font-size: 0.92rem;
+  margin-top: 0;
+  margin-bottom: 0.35rem;
+}
+
+.partner-card p {
+  margin-bottom: 0;
+  font-size: 0.83rem;
+}
+
+.partner-link {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 0.8rem;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--primary-border);
+  background: rgba(26,86,219,0.08);
+  color: var(--primary);
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.partner-link:hover {
+  background: rgba(26,86,219,0.14);
+}
+
 /* CONTACT CARD */
 .contact-card {
   background:
